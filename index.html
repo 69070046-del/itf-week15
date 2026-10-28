@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>เว็บสุ่มเมนูอาหาร</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f7f2;
+      color: #333;
+    }
+
+    nav {
+      background-color: #4d7658;
+      color: white;
+      padding: 16px 8%;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 35px auto;
+      text-align: center;
+    }
+
+    h1, h2 {
+      color: #365b40;
+    }
+
+    .food-card {
+      background: white;
+      max-width: 500px;
+      margin: 25px auto;
+      padding: 18px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+    }
+
+    .food-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 7px;
+    }
+
+    .food-card h2 {
+      margin-bottom: 8px;
+    }
+
+    .price {
+      color: #4d7658;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    button {
+      background-color: #4d7658;
+      color: white;
+      border: 0;
+      border-radius: 6px;
+      padding: 12px 22px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #365b40;
+    }
+
+    .menu-list {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: left;
+      line-height: 1.9;
+    }
+
+    footer {
+      margin-top: 35px;
+      padding: 16px;
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 5%; }
+      nav a { margin-right: 12px; }
+      .food-card img { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#home">หน้าแรก</a>
+    <a href="#menu-list">รายการเมนู</a>
+  </nav>
+
+  <main class="container" id="home">
+    <h1>วันนี้กินอะไรดี?</h1>
+    <p>กดปุ่มเพื่อสุ่มเมนูอาหารจานเดียว ราคา 30–50 บาท</p>
+
+    <section class="food-card">
+      <img id="food-image" src="https://img.wongnai.com/p/1920x0/2025/09/10/3d8919c282094cf59ad1e6cf512b38cd.jpg" alt="ข้าวกะเพราหมูสับ">
+      <h2 id="food-name">ข้าวกะเพราหมูสับ</h2>
+      <p id="food-description">หมูสับผัดกะเพราหอม ๆ กินกับข้าวสวยร้อน ๆ</p>
+      <p class="price" id="food-price">ราคา 45 บาท</p>
+      <button type="button" onclick="randomFood()">สุ่มเมนู</button>
+    </section>
+
+    <section id="menu-list">
+      <h2>เมนูที่มีให้สุ่ม</h2>
+      <div class="menu-list" id="menu-items"></div>
+    </section>
+  </main>
+
+  <footer>เว็บสุ่มเมนูอาหารง่าย ๆ</footer>
+
+  <script>
+    const foods = [
+      {
+        name: 'ข้าวกะเพราหมูสับ', price: 45,
+        description: 'หมูสับผัดกะเพราหอม ๆ กินกับข้าวสวยร้อน ๆ',
+        image: 'https://img.wongnai.com/p/1920x0/2025/09/10/3d8919c282094cf59ad1e6cf512b38cd.jpg'
+      },
+      {
+        name: 'ข้าวไข่เจียว', price: 30,
+        description: 'ไข่เจียวทอดใหม่ กินคู่กับข้าวสวย อิ่มง่าย',
+        image: 'https://shop.dusitserves.com/image/cache/catalog/product_kt/P1128110_500x500-500x500.JPG'
+      },
+      {
+        name: 'ข้าวผัดหมู', price: 45,
+        description: 'ข้าวผัดหมูหอมกลิ่นกระทะ เสิร์ฟพร้อมแตงกวา',
+        image: 'https://livedoor.blogimg.jp/ma888tsu/imgs/c/9/c94e84eb.jpg'
+      },
+      {
+        name: 'ผัดซีอิ๊วหมู', price: 45,
+        description: 'เส้นใหญ่ผัดซีอิ๊ว ใส่หมูและผักคะน้า',
+        image: 'https://kindeeyuudee.baanlaesuan.com/app/uploads/2024/09/batch_batch_DSC04815-1024x683.jpg'
+      },
+      {
+        name: 'ราดหน้าหมู', price: 45,
+        description: 'เส้นนุ่มราดน้ำข้น ใส่หมูและผักคะน้า',
+        image: 'https://img.wongnai.com/p/1920x0/2023/06/24/ba2e8774fae74fdda7864f49e3b7730d.jpg'
+      },
+      {
+        name: 'ข้าวหมูทอดกระเทียม', price: 50,
+        description: 'หมูทอดกระเทียมหอม ๆ กินกับข้าวสวยร้อน ๆ',
+        image: 'https://static.thairath.co.th/media/dFQROr7oWzulq5Fa6rpMP0IwcTkY7Nk2F3IyFKD0zZJwubT4CahDeGV0H2St2biDtXT.jpg'
+      },
+      {
+        name: 'ก๋วยเตี๋ยวหมูน้ำใส', price: 40,
+        description: 'ก๋วยเตี๋ยวน้ำซุปใส ใส่หมูและลูกชิ้น',
+        image: 'https://img.wongnai.com/p/1920x0/2024/01/25/b70397beb1fb4ee5900ad5a9027c2f30.jpg'
+      },
+      {
+        name: 'ข้าวมันไก่', price: 50,
+        description: 'ไก่นุ่มกับข้าวมันหอม ๆ เสิร์ฟพร้อมน้ำจิ้ม',
+        image: 'https://asianinspirations.com.au/wp-content/uploads/2019/01/R00907_Thai_Chicken_Rice-619x412.jpg'
+      }
+    ];
+
+    let currentFood = 0;
+
+    function randomFood() {
+      let newFood = Math.floor(Math.random() * foods.length);
+
+      while (newFood === currentFood) {
+        newFood = Math.floor(Math.random() * foods.length);
+      }
+
+      currentFood = newFood;
+      document.getElementById('food-image').src = foods[currentFood].image;
+      document.getElementById('food-image').alt = foods[currentFood].name;
+      document.getElementById('food-name').textContent = foods[currentFood].name;
+      document.getElementById('food-description').textContent = foods[currentFood].description;
+      document.getElementById('food-price').textContent = 'ราคา ' + foods[currentFood].price + ' บาท';
+    }
+
+    const menuItems = foods.map(function(food) {
+      return '<div>' + food.name + ' — ' + food.price + ' บาท</div>';
+    }).join('');
+
+    document.getElementById('menu-items').innerHTML = menuItems;
+  </script>
+</body>
+</html>
